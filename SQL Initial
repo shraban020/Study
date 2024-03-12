@@ -1,0 +1,152 @@
+-- SQL Study Material
+
+-- Select your working database
+
+USE AdventureWorks2022;
+GO
+
+-- Count the tables present in the database
+SELECT Count(*)
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE = 'BASE TABLE';
+
+-- Investigate schema and table
+SELECT * FROM sys.tables -- Table
+SELECT * FROM sys.schemas -- Schema
+
+-- Check names of tables and schemas present in the Database
+SELECT name from sys.tables
+SELECT name from sys.schemas
+
+-- Check how many tables are in a particular schema
+select t.name,s.name as schemaname 
+from sys.tables t
+join sys.schemas s on s.schema_id = t.schema_id
+where 
+	  --t.name like '%Sales%'     
+	  --and 
+	  s.name = 'Sales'
+
+name
+SalesTaxRate
+PersonCreditCard
+SalesTerritory
+SalesTerritoryHistory
+ShoppingCartItem
+SpecialOffer
+SpecialOfferProduct
+Store
+CountryRegionCurrency
+CreditCard
+Currency
+CurrencyRate
+Customer
+SalesOrderDetail
+SalesOrderHeader
+SalesOrderHeaderSalesReason
+SalesPerson
+SalesPersonQuotaHistory
+SalesReason
+
+
+-- Copy Data to Stagging Layer -- Created a Job 
+
+IF NOT EXISTS (SELECT 1 FROM sys.database WHERE name = 'AdwStagging')
+BEGIN
+    CREATE DATABASE AdwStagging
+END 
+
+OR
+
+CREATE DATABASE IF NOT EXISTS AdwStagging;
+
+
+USE AdventureWorks2022;
+GO
+
+select  *
+into    AdwStagging.dbo.SalesTaxRate
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SalesTaxRate
+
+select  *
+into    AdwStagging.dbo.PersonCreditCard
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.PersonCreditCard
+
+select  *
+into    AdwStagging.dbo.SalesTerritory
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SalesTerritory
+
+select  *
+into    AdwStagging.dbo.SalesTerritoryHistory
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SalesTerritoryHistory
+
+select  *
+into    AdwStagging.dbo.ShoppingCartItem
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.ShoppingCartItem
+
+select  *
+into    AdwStagging.dbo.SpecialOffer
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SpecialOffer
+
+select  *
+into    AdwStagging.dbo.SpecialOfferProduct
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SpecialOfferProduct
+
+select  *
+into    AdwStagging.dbo.CountryRegionCurrency
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.CountryRegionCurrency
+
+select  *
+into    AdwStagging.dbo.CreditCard
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.CreditCard
+
+select  *
+into    AdwStagging.dbo.CurrencyRate
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.CurrencyRate
+
+select  *
+into    AdwStagging.dbo.Customer
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.Customer
+
+select  *
+into    AdwStagging.dbo.SalesOrderDetail
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SalesOrderDetail
+
+select  *
+into    AdwStagging.dbo.SalesOrderHeaderSalesReason
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SalesOrderHeaderSalesReason
+
+select  *
+into    AdwStagging.dbo.SalesPerson
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SalesPerson
+
+select  *
+into    AdwStagging.dbo.SalesPersonQuotaHistory
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SalesPersonQuotaHistory
+
+select  *
+into    AdwStagging.dbo.SalesReason
+from    [DESKTOP-0NGJUC3].AdventureWorks2022.Sales.SalesReason
+
+
+Name
+CountryRegionCurrency
+CreditCard
+CurrencyRate
+Customer
+PersonCreditCard
+SalesOrderDetail
+SalesOrderHeaderSalesReason
+SalesPerson
+SalesPersonQuotaHistory
+SalesReason
+SalesTaxRate
+SalesTerritory
+SalesTerritoryHistory
+ShoppingCartItem
+SpecialOffer
+SpecialOfferProduct
+
+
+
+
